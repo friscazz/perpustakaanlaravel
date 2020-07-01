@@ -7,11 +7,15 @@
         @endif
         <h2>Data Buku</h2>
         <p align="right"><a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Buku</a></p>
-        <form action="{{route('buku.search')}}" method="GET">
-            @csrf
-            <input type="text" name="kata" class="form-control" placeholder="Cari...">
-        </form>
-        <table class="table table-stripe">
+        <div class="row">
+            <div class="col-3 offset-9">
+                <form action="{{route('buku.search')}}" method="GET">
+                    @csrf
+                    <input type="text" name="kata" class="form-control" placeholder="Cari...">
+                </form>
+            </div>
+        </div>
+        <table class="table table-stripe mt-3">
             <thead>
                 <tr>
                     <th>No</th>
@@ -41,7 +45,14 @@
                 @endforeach      
             </tbody>
         </table>
-        <div>Jumlah Buku : {{$jumlah_buku}}</div>
-        <div class="text-align-left">{{$data_buku->links()}}</div>
+        <div class="row">
+            <div class="col-3">
+                Jumlah Buku : {{$jumlah_buku}}
+               
+            </div>
+            <div class="col-2 offset-7">
+                {{$data_buku->links()}}
+            </div>
+        </div>
     </div>
 @endsection

@@ -2,17 +2,21 @@
 @section('content')
 @if(count($data_buku))
     <div class="container">
-    <div>Ditemukan {{count($data_buku)}} data dengan kata : {{ $cari ?? '' }}</div>
-        @if(Session::has('pesan'))
-            <div class="alert alert-success">{{Session::get('pesan')}} </div>
-        @endif
+    
         <h2>Data Buku</h2>
         <p align="right"><a href="{{ route('buku.create') }}" class="btn btn-primary">Tambah Buku</a></p>
-        <form action="{{route('buku.search')}}" method="GET">
-            @csrf
-            <input type="text" name="kata" class="form-control" placeholder="Cari...">
-        </form>
-        <table class="table table-stripe">
+        <div class="row">
+            <div class="col-6">
+                <div>Ditemukan {{count($data_buku)}} data dengan kata : {{ $cari ?? '' }}</div>
+            </div>
+            <div class="col-3 offset-3">
+                <form action="{{route('buku.search')}}" method="GET">
+                    @csrf
+                    <input type="text" name="kata" class="form-control" placeholder="Cari...">
+                </form>
+            </div>
+        </div>
+        <table class="table table-stripe mt-3">
             <thead>
                 <tr>
                     <th>No</th>
@@ -46,6 +50,10 @@
             <div><h4>Data {{$cari ?? ''}} Tidak ditemukan</h4></div>
             <a href="/buku">Kembali</a>
         @endif
-        <div class="text-align-left">{{$data_buku->links()}}</div>
+        <div class="row">
+            <div class="col-2 offset-10">
+                {{$data_buku->links()}}
+            </div>
+        </div>   
     </div>
 @endsection
